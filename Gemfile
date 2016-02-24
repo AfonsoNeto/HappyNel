@@ -75,4 +75,7 @@ group :test do
 
   # Clean database to more consistents tests
   gem 'database_cleaner'
+
+  # Generates test coverage reports
+  gem 'simplecov'
 end
