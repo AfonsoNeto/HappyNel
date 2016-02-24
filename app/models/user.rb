@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   # All users that has not voted yet on a given poll
   scope :not_voted_yet, lambda { |poll| called_to_vote(poll) - has_voted(poll) }
 
-	validates :name, presence: true
+	validates :name, :password, :role, presence: true
 
 	# Devise modules
   devise :database_authenticatable, :registerable, :validatable
