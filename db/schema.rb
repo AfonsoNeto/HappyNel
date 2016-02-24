@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224201338) do
+ActiveRecord::Schema.define(version: 20160224203815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,5 +33,16 @@ ActiveRecord::Schema.define(version: 20160224201338) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "voting_histories", force: :cascade do |t|
+    t.string   "encrypted_member_id"
+    t.integer  "poll_id"
+    t.boolean  "has_voted",           default: false, null: false
+    t.string   "token"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "voting_histories", ["poll_id"], name: "index_voting_histories_on_poll_id", using: :btree
 
 end
