@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	enum role: [:admin, :member]
 
+	validates :name, presence: true
+
   devise :database_authenticatable, :registerable, :validatable
 
   # Overrides devise active_for_authentication to allow only admins to sign in

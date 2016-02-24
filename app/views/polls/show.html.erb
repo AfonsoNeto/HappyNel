@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Acumulated score:</strong>
+  <%= @poll.acumulated_score %>
+</p>
+
+<p>
+  <strong>Final result:</strong>
+  <%= @poll.final_result %>
+</p>
+
+<%= link_to 'Edit', edit_poll_path(@poll) %> |
+<%= link_to 'Back', polls_path %>
