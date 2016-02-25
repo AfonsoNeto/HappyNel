@@ -1,0 +1,9 @@
+$("input[name*='user']").parent().removeClass("has-error");
+$("span.error-reason").html("");
+
+<% if @new_member.errors.any? %>
+	<% @new_member.errors.each do |attr, message| %>
+		$("input[name='user[<%= attr %>]']").parent().addClass("has-error");
+		$("input[name='user[<%= attr %>]']").siblings().filter(".error-reason").html("<%= message %>");
+	<% end %>
+<% end %>

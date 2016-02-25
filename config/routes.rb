@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :polls do
-    get   'vote'
-    patch 'set_score'
+    member do
+      get   'vote'
+      patch 'set_score'
+    end
   end
 
   devise_for :users, controllers: {registrations: "registrations"}

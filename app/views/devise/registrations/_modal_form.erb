@@ -6,30 +6,19 @@
         <h4 class="modal-title">Adicionar Membro</h4>
       </div>
         
-        <%= form_for(@new_member, url: create_member_path) do |f| %>
+        <%= form_for(@new_member, url: create_member_path, remote: true) do |f| %>
 
           <div class="modal-body">
-            <div class="form-group">
+            <div class="form-group <%= 'has-error' if @new_member.errors[:name].any? %>">
               <%= f.label :name %><br />
-              <%= f.text_field :name, autofocus: true, class: "form-control" %>
+              <%= f.text_field :name, autofocus: true, class: "form-control", required: false %>
+              <%= render_attribute_error_if_any(@new_member.errors, :name) %>
             </div>
 
-            <div class="form-group">
+            <div class="form-group <%= 'has-error' if @new_member.errors[:email].any? %>">
               <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br />
-              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              <%= f.email_field :email, autofocus: true, class: "form-control", required: false %>
+              <%= render_attribute_error_if_any(@new_member.errors, :email) %>
             </div>
           </div>
 

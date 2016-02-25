@@ -31,7 +31,7 @@ class PollsController < ApplicationController
         format.html { redirect_to authenticated_root_url, notice: 'Enquete enviada com sucesso.' }
         format.json { render :show, status: :created, location: @poll }
       else
-        format.html { redirect_to authenticated_root_url, notice: 'Algo deu errado. Tente novamente!' }
+        format.html { redirect_to authenticated_root_url, alert: 'Algo deu errado. Tente novamente!' }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end

@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        name: Nome
+        password: Senha
+        email: Email
+        password_confirmation: Confirmação de senha
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "Campo obrigatório"
+              taken: "Este nome já está sendo usado"
+              invalid: "Nome inválido"
+            email:
+              blank: "Campo obrigatório"
+              taken: "Este email já está sendo usado"
+              invalid: "E-mail inválido"

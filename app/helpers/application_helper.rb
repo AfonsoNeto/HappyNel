@@ -12,4 +12,12 @@ module ApplicationHelper
 		end
 	end
 
+	def render_attribute_error_if_any(errors_list, attribute)
+		content_tag(:span, class: "error-reason") do
+			if errors_list[attribute.to_sym].any?
+				errors_list[attribute.to_sym].full_message
+			end
+		end
+	end
+
 end
