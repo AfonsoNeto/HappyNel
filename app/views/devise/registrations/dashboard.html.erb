@@ -1,11 +1,30 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
+			<div class="row">
 
-			<div class="col-md-12">
-				<h3>Dashboard</h3>
+				<div class="col-md-5">
+					<h3>Membros</h3>
+					<ul>
+						<% @members.find_each do |member| %>
+							<li><%= member.email %></li>
+						<% end %>
+					</ul>
+				</div>
+
+				<div class="col-md-offset-2 col-md-5">
+					<h3>Enquetes</h3>
+					<ul>
+						<% @polls.find_each do |poll| %>
+							<li><%= poll.created_at %></li>
+						<% end %>
+					</ul>
+					<%= form_tag ('/polls') do %>
+						<%= submit_tag "Nova Enquete", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros..."} %>
+					<% end %>
+				</div>
+
 			</div>
-
 		</div>
 	</div>
 </div>
