@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   # Return all users that has already voted on a given poll
   scope :has_voted, lambda { |poll|
-  	User.where(id: poll.voting_histories.voted.map {
+  	User.where(id: poll.voting_histories.has_voted(true).map {
   		|vh| vh.decrypted_member_id
   	})
   }
