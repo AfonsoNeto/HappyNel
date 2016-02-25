@@ -1,14 +1,14 @@
 class VotingHistory < ActiveRecord::Base
 	belongs_to :poll
 
+	scope :has_voted, lambda { |voted|
+		where(has_voted: voted)
+	}
+
 	validates :encrypted_member_id, :token, :poll_id, presence: true
 	validates :encrypted_member_id, uniqueness: {scope: :poll_id}
 
 	before_validation :set_token
-
-	scope :has_voted, lambda { |voted|
-		where(has_voted: voted)
-	}
 
 	# Setters for user/member_id
 	#   This is just a easy way to save only encrypted ids. Possible methods:
@@ -50,7 +50,7 @@ class VotingHistory < ActiveRecord::Base
 		def set_token
 		  self.token = loop do
 	      token = SecureRandom.urlsafe_base64
-	      break token unless VotingHistory.where(token: token).exists?
+	      break token unless VotingHistory.exists?(token: token)
 	    end
 		end
 end

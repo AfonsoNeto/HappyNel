@@ -6,6 +6,7 @@ RSpec.describe Poll, type: :model do
   	expect(@poll.valid?).to eq(true)
 	end
 
+	# TESTING VALIDATIONS
 	describe "is invalid when" do
 		before :each do
 			@poll = create :poll

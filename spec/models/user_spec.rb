@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   	expect(@user.valid?).to eq(true)
 	end
 
-	# TESTS VALIDATIONS
+	# TESTING VALIDATIONS
 	describe "is invalid when" do
 		before :each do
 			@user = create :user
