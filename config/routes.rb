@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {registrations: "registrations"}
   
-  devise_scope :user do
+  devise_scope :user do    
     authenticated :user do
-      root 'registrations#dashboard', as: :authenticated_root
+      root  'registrations#dashboard',   as: :authenticated_root
+      post  'create_member',             to: 'registrations#create_member'
     end
 
     unauthenticated do
@@ -17,5 +18,5 @@ Rails.application.routes.draw do
   end
 
   # Static pages routes
-  get '/thanks_to_vote', :to => redirect('/voted.html')
+  get '/thanks_to_vote', to: redirect('/voted.html')
 end

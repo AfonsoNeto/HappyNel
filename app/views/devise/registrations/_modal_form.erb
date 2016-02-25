@@ -1,0 +1,44 @@
+<div class="modal fade" id="member-register-modal" title="Adicionar Membro" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Adicionar Membro</h4>
+      </div>
+        
+        <%= form_for(@new_member, url: create_member_path) do |f| %>
+
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.label :name %><br />
+              <%= f.text_field :name, autofocus: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <%= submit_tag "Salvar", class: "btn btn-success" %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>

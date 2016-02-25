@@ -11,5 +11,5 @@ module ApplicationHelper
 			concat(content_tag(:strong, message))
 		end
 	end
-	
+
 end

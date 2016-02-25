@@ -7,9 +7,10 @@
 					<h3>Membros</h3>
 					<ul>
 						<% @members.find_each do |member| %>
-							<li><%= member.email %></li>
+							<li><%= member.name %></li>
 						<% end %>
 					</ul>
+					<%= button_tag "Novo membro", class: "btn btn-primary", remote: true, data: {toggle: "modal", target: "#member-register-modal"} %>
 				</div>
 
 				<div class="col-md-offset-2 col-md-5">
@@ -28,3 +29,5 @@
 		</div>
 	</div>
 </div>
+
+<%= render 'modal_form' %>
