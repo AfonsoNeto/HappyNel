@@ -9,7 +9,8 @@ class VotingHistory < ActiveRecord::Base
 	validates :encrypted_member_id, uniqueness: {scope: :poll_id}
 	validates :has_voted, inclusion: [true, false]
 
-	before_validation :set_token
+	before_validation :set_token # Sets token that will be used to validate email sent
+	after_create			:send_call # Send email calling member to vote
 
 	# Setters for user/member_id
 	#   This is just a easy way to save only encrypted ids. Possible methods:
@@ -53,5 +54,10 @@ class VotingHistory < ActiveRecord::Base
 	      token = SecureRandom.urlsafe_base64
 	      break token unless VotingHistory.exists?(token: token)
 	    end
+		end
+
+		def send_call
+			user = User.find(self.decrypted_member_id)
+			HappyNelMailer.call_to_vote(user.email, self).deliver_now
 		end
 end

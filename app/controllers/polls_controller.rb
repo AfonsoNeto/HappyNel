@@ -24,14 +24,14 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
-    @poll = Poll.new(poll_params)
+    @poll = Poll.create(has_finished: false)
 
     respond_to do |format|
-      if @poll.save
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+      if User.send_call_for_members(@poll)
+        format.html { redirect_to authenticated_root_url, notice: 'Enquete enviada com sucesso.' }
         format.json { render :show, status: :created, location: @poll }
       else
-        format.html { render :new }
+        format.html { redirect_to authenticated_root_url, notice: 'Algo deu errado. Tente novamente!' }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end

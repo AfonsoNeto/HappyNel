@@ -26,6 +26,20 @@ class User < ActiveRecord::Base
 	# Devise modules
   devise :database_authenticatable, :registerable, :validatable
 
+  def self.send_call_for_members(poll)
+    return false if poll.blank?
+
+    begin
+      User.members.find_each do |user|
+        VotingHistory.create(user: user, poll: poll, has_voted: false)
+      end
+    rescue Exception => e
+      return false
+    end
+
+    return true
+  end
+
   # Overrides devise active_for_authentication to allow only admins to sign in
   def active_for_authentication?
     super and self.admin?
