@@ -1,0 +1,5 @@
+<%= form_tag(poll_set_score_path, method: :patch) do %>
+	<%= hidden_field_tag "token", @token %>
+	<%= number_field_tag "score" %>
+	<%= submit_tag "Votar", class: "btn btn-primary" %>
+<% end %>

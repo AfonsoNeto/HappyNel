@@ -16,7 +16,7 @@
 					<h3>Enquetes</h3>
 					<ul>
 						<% @polls.find_each do |poll| %>
-							<li><%= poll.created_at %></li>
+							<li><%= poll.created_at %> - Nota parcial: <%= poll.partial_result %></li>
 						<% end %>
 					</ul>
 					<%= form_tag ('/polls') do %>

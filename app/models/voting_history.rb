@@ -9,8 +9,8 @@ class VotingHistory < ActiveRecord::Base
 	validates :encrypted_member_id, uniqueness: {scope: :poll_id}
 	validates :has_voted, inclusion: [true, false]
 
-	before_validation :set_token # Sets token that will be used to validate email sent
-	after_create			:send_call # Send email calling member to vote
+	before_validation :set_token, on: :create # Sets token that will be used to validate email sent
+	after_create			:send_call 							# Send email calling member to vote
 
 	# Setters for user/member_id
 	#   This is just a easy way to save only encrypted ids. Possible methods:

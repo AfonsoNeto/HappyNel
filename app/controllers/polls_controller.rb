@@ -37,6 +37,30 @@ class PollsController < ApplicationController
     end
   end
 
+  # GET
+  def vote
+    @token = params[:token]
+    @voting_history = VotingHistory.where(token: @token).take
+
+    if @voting_history.blank?
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    elsif @voting_history.has_voted
+      redirect_to :thanks_to_vote
+    end
+  end
+
+  # PATCH/PUT
+  def set_score
+    @voting_history = VotingHistory.find_by(token: params[:token])
+    @voting_history.poll.add_vote(params[:score]) unless @voting_history.has_voted
+
+    @voting_history.update_attributes({has_voted: true})
+
+    respond_to do |format|
+      format.html { redirect_to :thanks_to_vote }
+    end
+  end
+
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update

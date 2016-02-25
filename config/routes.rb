@@ -15,4 +15,7 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  # Static pages routes
+  get '/thanks_to_vote', :to => redirect('/voted.html')
 end
