@@ -34,8 +34,8 @@
 		</nav>
   <% end %>
 
-  <%= notice %>
-  <%= alert %>
+  <%= render_alert(notice) 					if notice %>
+	<%= render_alert(alert, "danger") if alert %>
 
 <%= yield %>
 

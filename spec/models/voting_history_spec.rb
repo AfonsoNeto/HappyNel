@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe VotingHistory, type: :model do
   it "has valid factory" do
   	@voting_history = create :voting_history
-  	expect(@voting_history.valid?).to eq(true)
+  	expect(@voting_history.valid?).to be
 	end
 
 	# TESTING VALIDATIONS
@@ -18,48 +18,48 @@ RSpec.describe VotingHistory, type: :model do
 				@voting_history.user = nil
 				expect(@voting_history.valid?).to eq(false)
 				@voting_history.user = @user
-				expect(@voting_history.valid?).to eq(true)
+				expect(@voting_history.valid?).to be
 			end
 
 			it "with member= method" do
 				@voting_history.member = nil
 				expect(@voting_history.valid?).to eq(false)
 				@voting_history.member = @user
-				expect(@voting_history.valid?).to eq(true)
+				expect(@voting_history.valid?).to be
 			end
 
 			it "with user_id= method" do
 				@voting_history.user_id = nil
 				expect(@voting_history.valid?).to eq(false)
 				@voting_history.user_id = @user.id
-				expect(@voting_history.valid?).to eq(true)
+				expect(@voting_history.valid?).to be
 			end
 
 			it "with member_id= method" do
 				@voting_history.member_id = nil
 				expect(@voting_history.valid?).to eq(false)
 				@voting_history.member_id = @user.id
-				expect(@voting_history.valid?).to eq(true)
+				expect(@voting_history.valid?).to be
 			end
 
 			it "with encrypted_member_id= method" do
 				@voting_history.encrypted_member_id = nil
 				expect(@voting_history.valid?).to eq(false)
 				@voting_history.encrypted_member_id = @user.id
-				expect(@voting_history.valid?).to eq(true)
+				expect(@voting_history.valid?).to be
 			end
 		end
 
 		it "poll is missing" do
 			@voting_history.poll = nil
 			expect(@voting_history.valid?).to eq(false)
-			expect(@voting_history.errors[:poll_id].any?).to eq(true)
+			expect(@voting_history.errors[:poll_id].any?).to be
 		end
 
 		it "has_voted is missing" do
 			@voting_history.has_voted = nil
 			expect(@voting_history.valid?).to eq(false)
-			expect(@voting_history.errors[:has_voted].any?).to eq(true)
+			expect(@voting_history.errors[:has_voted].any?).to be
 		end
 	end
 
@@ -119,7 +119,7 @@ RSpec.describe VotingHistory, type: :model do
 		it "set token before validation" do
 			voting_history = create :voting_history, user: @user, token: nil
 			expect(voting_history.token.blank?).to eq(false)
-			expect(voting_history.valid?).to eq(true)
+			expect(voting_history.valid?).to be
 		end
 	end
 end

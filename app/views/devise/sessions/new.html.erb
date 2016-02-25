@@ -1,24 +1,22 @@
-<h2>Log in</h2>
+<div id="new-session-screen">
+  <div class="container">
+    <div class="wrapper">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin" }) do |f| %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+        <h3 class="form-signin-heading">
+          <i class="glyphicon glyphicon-user"></i>
+          Acesso do administrador
+        </h3>
+        <hr class="colorgraph"><br>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <%= f.email_field :email, class: "form-control", placeholder: "Email", autofocus: true, required: true %>
+        
+        <%= f.password_field :password, class: "form-control", placeholder: "Senha", autocomplete: "off", required: true %>
+
+        <%= f.submit "Login", class: "btn btn-lg btn-primary btn-block" %>
+      <% end %>
+
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
