@@ -74,7 +74,7 @@ RSpec.describe User, type: :model do
 				called_ones.include? usr
 			}.uniq
 
-			expect(was_every_user_called).to eq([true])
+			expect(was_every_user_called).to eq([true]) unless @users.blank?
 		end
 
 		it "that has already voted on poll" do
@@ -86,7 +86,20 @@ RSpec.describe User, type: :model do
 				already_voted_ones.include? usr
 			}.uniq
 			
-			expect(has_these_guys_voted).to eq([true])
+			expect(has_these_guys_voted).to eq([true]) unless @users_that_has_voted.blank?
+		end
+
+		it "that hasn't voted on poll yet" do
+			not_voted_ones = User.not_voted_yet(@poll)
+			local_guys_that_didnt_vote = @users - @users_that_has_voted
+
+			# It will check if each element is included on the scope return
+			#   the uniq method must return [true] here
+			the_ones_who_didnt_vote = local_guys_that_didnt_vote.map {|usr|
+				not_voted_ones.include? usr
+			}.uniq
+			
+			expect(the_ones_who_didnt_vote).to eq([true]) unless local_guys_that_didnt_vote.blank?
 		end
 	end
 
