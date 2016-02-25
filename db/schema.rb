@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224203815) do
+ActiveRecord::Schema.define(version: 20160225020528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "polls", force: :cascade do |t|
-    t.float    "acumulated_score", default: 0.0, null: false
-    t.float    "final_result",     default: 0.0, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.float    "acumulated_score", default: 0.0,   null: false
+    t.float    "final_result",     default: 0.0,   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "has_finished",     default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
