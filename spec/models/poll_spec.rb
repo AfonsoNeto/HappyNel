@@ -23,5 +23,11 @@ RSpec.describe Poll, type: :model do
 			expect(@poll.valid?).to eq(false)
 			expect(@poll.errors[:final_result].any?).to eq(true)
 		end
+
+		it "has_finished is missing" do
+			@poll.has_finished = nil
+			expect(@poll.valid?).to eq(false)
+			expect(@poll.errors[:has_finished].any?).to eq(true)
+		end
 	end
 end

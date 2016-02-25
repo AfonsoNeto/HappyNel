@@ -7,6 +7,7 @@ class VotingHistory < ActiveRecord::Base
 
 	validates :encrypted_member_id, :token, :poll_id, presence: true
 	validates :encrypted_member_id, uniqueness: {scope: :poll_id}
+	validates :has_voted, inclusion: [true, false]
 
 	before_validation :set_token
 

@@ -55,6 +55,12 @@ RSpec.describe VotingHistory, type: :model do
 			expect(@voting_history.valid?).to eq(false)
 			expect(@voting_history.errors[:poll_id].any?).to eq(true)
 		end
+
+		it "has_voted is missing" do
+			@voting_history.has_voted = nil
+			expect(@voting_history.valid?).to eq(false)
+			expect(@voting_history.errors[:has_voted].any?).to eq(true)
+		end
 	end
 
 	# TESTING SCOPES
