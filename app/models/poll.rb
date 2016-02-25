@@ -6,6 +6,7 @@ class Poll < ActiveRecord::Base
 
 	def partial_result
 		value_to_take = self.final_result > 0 ? self.final_result : self.acumulated_score
+		return value_to_take if value_to_take == 0
 		return value_to_take / self.voting_histories.has_voted(true).count
 	end
 
@@ -22,6 +23,7 @@ class Poll < ActiveRecord::Base
 		if computed_votes + 1 == total_votes
 			self.final_result = self.acumulated_score / total_votes
 			self.has_finished = true
+			# Maybe send email to all participant users with the result?
 		end
 
 		self.save

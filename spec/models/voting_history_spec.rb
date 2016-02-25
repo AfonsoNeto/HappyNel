@@ -117,10 +117,9 @@ RSpec.describe VotingHistory, type: :model do
 		end
 
 		it "set token before validation" do
-			@voting_history.token = nil
-			expect(@voting_history.token.blank?).to eq(true)
-			expect(@voting_history.valid?).to eq(true)
-			expect(@voting_history.token.blank?).to eq(false)
+			voting_history = create :voting_history, user: @user, token: nil
+			expect(voting_history.token.blank?).to eq(false)
+			expect(voting_history.valid?).to eq(true)
 		end
 	end
 end
