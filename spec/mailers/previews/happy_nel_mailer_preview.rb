@@ -3,4 +3,8 @@ class HappyNelMailerPreview < ActionMailer::Preview
 	def call_to_vote
 		HappyNelMailer.call_to_vote(User.take.try(:email), VotingHistory.take)
 	end
+
+	def notify_poll_result
+		HappyNelMailer.notify_poll_result(User.take.try(:email), Poll.third)
+	end
 end
