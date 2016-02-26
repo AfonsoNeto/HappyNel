@@ -1,6 +1,7 @@
 # Devise registrations controller override
 class RegistrationsController < Devise::RegistrationsController
 	before_action :authenticate_user!
+  before_action :set_poll, only: [:destroy_member]
 	
   def dashboard
   	@members 		= User.members
@@ -24,8 +25,22 @@ class RegistrationsController < Devise::RegistrationsController
   	end
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def member_params
-    params.require(:user).permit(:name, :email)
+  def destroy_member
+    @member.destroy
+    respond_to do |format|
+      format.html { redirect_to authenticated_root_url, notice: 'Membro removido com sucesso.' }
+      format.json { head :no_content }
+    end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_poll
+      @member = User.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def member_params
+      params.require(:user).permit(:name, :email)
+    end
 end 

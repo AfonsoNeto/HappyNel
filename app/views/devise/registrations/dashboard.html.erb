@@ -5,23 +5,45 @@
 
 				<div class="col-md-5">
 					<h3>Membros</h3>
-					<ul>
-						<% @members.find_each do |member| %>
-							<li><%= member.name %></li>
-						<% end %>
-					</ul>
+						<table class="table">
+							<thead>
+								<td>Nome</td>
+								<td>Email</td>
+							</thead>
+							<tbody>
+								<% @members.find_each do |member| %>
+									<tr>
+										<td><%= member.name %></td>
+										<td><%= member.email %></td>
+										<td><%= link_to destroy_member_path(member), method: :delete, data: {confirm: "Tem certeza de que deseja excluir este membro?"} do %>
+													<i class="glyphicon glyphicon-trash"></i>
+												<% end %>
+										</td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
 					<%= button_tag "Novo membro", class: "btn btn-primary", remote: true, data: {toggle: "modal", target: "#member-register-modal"} %>
 				</div>
 
 				<div class="col-md-offset-2 col-md-5">
 					<h3>Enquetes</h3>
-					<ul>
-						<% @polls.find_each do |poll| %>
-							<li><%= poll.created_at %> - Nota parcial: <%= poll.partial_result %></li>
-						<% end %>
-					</ul>
+					<table class="table">
+						<thead>
+							<td>Data</td>
+							<td>Nota parcial</td>
+						</thead>
+						<tbody>
+							<% @polls.find_each do |poll| %>
+								<tr>
+									<td><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></td>
+									<td><%= poll.partial_result %></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
 					<%= form_tag ('/polls') do %>
-						<%= submit_tag "Criar enquete e aguardar votos", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros..."} %>
+						<%= submit_tag "Criar enquete", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros..."} %>
 					<% end %>
 				</div>
 
