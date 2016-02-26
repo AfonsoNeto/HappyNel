@@ -26,45 +26,49 @@
 					<%= button_tag "Novo membro", class: "btn btn-primary", remote: true, data: {toggle: "modal", target: "#member-register-modal"} %>
 				</div>
 
-				<div class="col-md-offset-2 col-md-5">
+				<div id="polls-list" class="col-md-offset-2 col-md-5">
 					<h3>Enquetes</h3>
 
 					<% @polls.find_each do |poll| %>
-						<div class="pull-left">
-							<h1 class="rating-num"><%= poll.final_result %></h1>
-			        <div class="rating">
-			          <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-			          </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-			          </span><span class="glyphicon glyphicon-star-empty"></span>
-			        </div>
-			      </div>
-		        <div class="pull-right text-right">
-			        <div>
-			        	<span><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></span>
-			        </div>
-		        	<span class="glyphicon glyphicon-user"></span> &nbsp;
-		        	<%= poll.voting_histories.count %> votaram
-		        </div>
-		        <div class="clearfix"></div>
-		        <hr />
+
+						<% if poll.has_finished %>
+
+							<div class="row alert alert-success">
+								<div class="pull-left">
+									<h1 class="rating-num"><%= poll.final_result %></h1>
+					        <div class="rating">
+					        	<%= render_stars_count(poll.final_result) %>
+					        </div>
+					      </div>
+				        <div class="pull-right text-right">
+					        <div>
+					        	<span><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></span>
+					        </div>
+				        	<span class="glyphicon glyphicon-user"></span> &nbsp;
+				        	<%= poll.voting_histories.count %> votos
+				        </div>
+				      </div>
+
+						<% else %>
+
+							<div class="row alert alert-warning unfinished-poll-card">
+								<div class="pull-left">
+									<span>Nota parcial:</span>
+									<h3 class="rating-num"><%= poll.final_result %></h3>
+					      </div>
+				        <div class="pull-right text-right">
+					        <div>
+					        	<span><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></span>
+					        </div>
+				        	<p><span class="glyphicon glyphicon-user"></span> &nbsp;
+				        	<%= User.has_voted(poll).count %> de <%= poll.voting_histories.count %> votaram</p>
+				        	<!--<%= link_to "Reenviar email", "", class: "btn btn-primary", data: {confirmation: "Reenviar e-mail para todos os membros que ainda não votaram?"} %> -->
+				        </div>
+				      </div>
+
+			       <% end %>
 					<% end %>
 
-					<!-- <table class="table">
-						<thead>
-							<td>Data</td>
-							<td>Nota parcial</td>
-							<td>Resultado final</td>
-						</thead>
-						<tbody>
-							<% @polls.find_each do |poll| %>
-								<tr>
-									<td><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></td>
-									<td><%= poll.partial_result %></td>
-									<td><%= poll.final_result %></td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table> -->
 					<%= form_tag ('/polls') do %>
 						<%= submit_tag "Criar enquete", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros. Por favor, aguarde..."} %>
 					<% end %>
