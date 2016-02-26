@@ -5,9 +5,9 @@ class Poll < ActiveRecord::Base
 	validates :has_finished, inclusion: [true, false]
 
 	def partial_result
-		value_to_take = self.final_result > 0 ? self.final_result : self.acumulated_score
-		return value_to_take if value_to_take == 0
-		return value_to_take / self.voting_histories.has_voted(true).count
+		return self.final_result if self.final_result > 0
+		return 0 if self.acumulated_score == 0
+		return self.acumulated_score / self.voting_histories.has_voted(true).count
 	end
 
 	def add_vote(score)

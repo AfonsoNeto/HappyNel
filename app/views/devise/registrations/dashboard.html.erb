@@ -32,18 +32,20 @@
 						<thead>
 							<td>Data</td>
 							<td>Nota parcial</td>
+							<td>Resultado final</td>
 						</thead>
 						<tbody>
 							<% @polls.find_each do |poll| %>
 								<tr>
 									<td><%= poll.created_at.strftime("%d/%m/%Y as %H:%M") %></td>
 									<td><%= poll.partial_result %></td>
+									<td><%= poll.final_result %></td>
 								</tr>
 							<% end %>
 						</tbody>
 					</table>
 					<%= form_tag ('/polls') do %>
-						<%= submit_tag "Criar enquete", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros..."} %>
+						<%= submit_tag "Criar enquete", class: "btn btn-primary", data: {confirm: "Tem certeza de que deseja criar? Isso enviará o link de votação para todos os membros.", disable_with: "Convidando membros. Por favor, aguarde..."} %>
 					<% end %>
 				</div>
 

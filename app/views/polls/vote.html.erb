@@ -1,5 +1,14 @@
-<%= form_tag(set_score_poll_path, method: :patch) do %>
-	<%= hidden_field_tag "token", @token %>
-	<%= number_field_tag "score" %>
-	<%= submit_tag "Votar", class: "btn btn-primary" %>
-<% end %>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-offset-5 col-md-2">
+			<div class="row text-center">
+
+				<%= form_tag(set_score_poll_path, method: :patch, id: "voting-form") do %>
+					<%= hidden_field_tag "token", @token %>
+					<input id="voting-star-rating" name="score" class="rating-loading">
+				<% end %>
+
+			</div>
+		</div>
+	</div>
+</div>
