@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
         VotingHistory.create(user: user, poll: poll, has_voted: false)
       end
     rescue Exception => e
+      poll.destroy
       return false
     end
 
