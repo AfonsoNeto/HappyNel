@@ -6,8 +6,9 @@ class HappyNelMailer < ApplicationMailer
     mail(to: user_email, subject: '[HappyNel] Nova enquete aguardando seu voto')
   end
 
-  def notify_poll_result(user_email, poll)
+  def notify_poll_result(user, poll)
+  	@user = user
     @poll = poll
-    mail(to: user_email, subject: '[HappyNel] Resultado da enquete')
+    mail(to: @user.email, subject: '[HappyNel] Resultado da enquete')
   end
 end

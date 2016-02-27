@@ -76,7 +76,7 @@ A component of Napkinstudio Portal - http://portal.napkinstudio.nl
 				<div style="line-height: 44px;">
 					<font face="Arial, Helvetica, sans-serif" size="5" color="#57697e" style="font-size: 34px;">
 					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 34px; color: #57697e;">
-						A votação foi encerrada<br /> e seu voto fez a diferença!!</br>
+						A votação foi encerrada. <%= "<br />Obrigado por participar!".html_safe unless @user.admin? %></br>
 					</span></font>
 				</div>
 				<!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
@@ -85,16 +85,15 @@ A component of Napkinstudio Portal - http://portal.napkinstudio.nl
 				<div style="line-height: 24px;">
 					<font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 15px;">
 					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #57697e;">
-						Veja o resultado:
+						Resultado:
 					</span></font>
 				</div>
 				<!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
 			</td></tr>
 			<tr><td align="center">
 				<div style="line-height: 24px; text-align: center;">
-					<font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 15px;">
+					<font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 30px;">
 					<h1><%= @poll.final_result %></h1>
-					<div><%= render_stars_count(@poll.final_result) %></div>
 					</font>
 				</div>
 				<!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>

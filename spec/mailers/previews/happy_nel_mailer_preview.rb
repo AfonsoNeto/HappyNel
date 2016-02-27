@@ -5,6 +5,6 @@ class HappyNelMailerPreview < ActionMailer::Preview
 	end
 
 	def notify_poll_result
-		HappyNelMailer.notify_poll_result(User.take.try(:email), Poll.third)
+		HappyNelMailer.notify_poll_result(User.take, Poll.take)
 	end
 end

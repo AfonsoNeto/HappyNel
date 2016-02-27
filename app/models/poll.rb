@@ -23,7 +23,11 @@ class Poll < ActiveRecord::Base
 		if computed_votes + 1 == total_votes
 			self.final_result = self.acumulated_score / total_votes
 			self.has_finished = true
-			# Maybe send email to all participant users with the result?
+
+			# Send email to all participant users with the result?
+			(User.called_to_vote(self) + User.admins).each do |usr|
+				HappyNelMailer.notify_poll_result(usr, self).deliver_now
+			end
 		end
 
 		self.save
