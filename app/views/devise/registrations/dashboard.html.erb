@@ -35,7 +35,7 @@
 
 							<div class="row alert alert-success">
 								<div class="pull-left">
-									<h1 class="rating-num"><%= poll.final_result %></h1>
+									<h1 class="rating-num"><%= formatted_final_result poll.final_result %></h1>
 					        <div class="rating">
 					        	<%= render_stars_count(poll.final_result) %>
 					        </div>
@@ -54,7 +54,7 @@
 							<div class="row alert alert-warning unfinished-poll-card">
 								<div class="pull-left">
 									<span>Nota parcial:</span>
-									<h3 class="rating-num"><%= poll.partial_result %></h3>
+									<h3 class="rating-num"><%= formatted_final_result poll.partial_result %></h3>
 					      </div>
 				        <div class="pull-right text-right">
 					        <div>

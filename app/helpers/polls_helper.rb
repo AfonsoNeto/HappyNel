@@ -1,4 +1,8 @@
 module PollsHelper
+	def formatted_final_result(score)
+		raw score.round 2
+	end
+
 	def render_stars_count(score)
 		score 			= score.round
 		total_stars = 5
