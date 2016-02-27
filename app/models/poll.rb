@@ -11,8 +11,8 @@ class Poll < ActiveRecord::Base
 	end
 
 	def add_vote(score)
-		return if score.blank?
-		score = score.to_f
+		score = score.try(:to_f)
+		return false if score.blank? or score > 5 or score <= 0
 
 		total_votes 		= self.voting_histories.count
 		computed_votes 	= self.voting_histories.has_voted(true).count
@@ -31,5 +31,6 @@ class Poll < ActiveRecord::Base
 		end
 
 		self.save
+		return true
 	end
 end
