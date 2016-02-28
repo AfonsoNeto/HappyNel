@@ -4,15 +4,20 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
-    @poll = Poll.create(has_finished: false)
+    @poll = Poll.create(has_finished: false) if User.members.any?
 
     respond_to do |format|
-      if User.send_call_for_members(@poll)
-        format.html { redirect_to authenticated_root_url, notice: 'Enquete enviada com sucesso.' }
-        format.json { render :show, status: :created, location: @poll }
+      if @poll
+        if User.send_call_for_members(@poll)
+          format.html { redirect_to authenticated_root_url, notice: 'Enquete enviada com sucesso.' }
+          format.json { render :show, status: :created, location: @poll }
+        else
+          format.html { redirect_to authenticated_root_url, alert: 'Algo deu errado. Tente novamente!' }
+          format.json { render json: @poll.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { redirect_to authenticated_root_url, alert: 'Algo deu errado. Tente novamente!' }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
+        format.html { redirect_to authenticated_root_url, alert: 'É preciso ter membros cadastrados antes de criar uma enquete.' }
+        format.json { render json: @poll.try(:errors), status: :unprocessable_entity }
       end
     end
   end
