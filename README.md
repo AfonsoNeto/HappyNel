@@ -23,4 +23,4 @@ This app users [Mailcatcher](http://mailcatcher.me/) to send emails on developme
 	$ gem install mailcatcher
 	$ mailcatcher # Then access your localhost:1080 to see web interface with the received/sent emails
 
-On production environment, unless you set your own configs, you will need (Sendgrid)[https://sendgrid.com/] credentials.
+On production environment, unless you set your own configs, you will need [Sendgrid](https://sendgrid.com/) credentials.
