@@ -34,7 +34,7 @@ RSpec.describe Poll, type: :model do
 	# TESTING METHODS AND CALLBACKS
 	describe "it should" do
 		before :each do
-			@poll = create :poll, acumulated_score: 0, final_result: 0, has_finished: false
+			@poll = create :poll, acumulated_score: 0.0, final_result: 0.0, has_finished: false
 			@voting_histories = create_list :voting_history, rand(2..10), poll: @poll
 		end
 
@@ -51,7 +51,11 @@ RSpec.describe Poll, type: :model do
 			expect(@poll.partial_result).to eq(0)
 			score = 5.0
 			@poll.add_vote(score)
-			expect(@poll.partial_result).to eq(score / @poll.voting_histories.has_voted(true).count)
+			if @poll.has_finished
+				expect(@poll.partial_result).to eq(@poll.final_result)
+			else
+				expect(@poll.partial_result).to eq(score / @poll.voting_histories.has_voted(true).count)
+			end
 		end
 	end
 end
