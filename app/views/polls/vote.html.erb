@@ -3,7 +3,7 @@
 		<div class="col-md-offset-5 col-md-2">
 			<div class="row text-center">
 
-				<%= form_tag(set_score_poll_path, method: :patch, id: "voting-form") do %>
+				<%= form_tag(set_score_polls_path, method: :patch, id: "voting-form") do %>
 					<%= hidden_field_tag "token", @token %>
 					<input id="voting-star-rating" name="score" class="rating-loading">
 				<% end %>

@@ -76,7 +76,7 @@ RSpec.describe RegistrationsController, type: :controller do
 		context "post create_member" do
 			it "with invalid params and fail" do
 				expect {
-					post :create_member, {user: {name: nil, email: nil}, format: :js}
+					post :create_member, {user: {name: nil, email: "invalid@mail"}, format: :js}
 				}.to change(User.members, :count).by(0)
 				expect(response).to have_http_status(:unauthorized)
 			end

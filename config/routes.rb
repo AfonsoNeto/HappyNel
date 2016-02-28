@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   resources :polls, only: [:create] do
-    member do
-      get   'vote'
-      patch 'set_score'
-    end
+    get   'vote'     , on: :member
+    patch 'set_score', on: :collection
   end
 
   devise_for :users, skip: [:registrations], controllers: {registrations: "registrations"}
