@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  acumulated_score: 1.5
-  final_result: 1.5
-
-two:
-  acumulated_score: 1.5
-  final_result: 1.5

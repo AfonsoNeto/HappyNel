@@ -3,5 +3,4 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   helper ApplicationHelper
-  helper PollsHelper
 end
