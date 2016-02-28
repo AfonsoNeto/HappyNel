@@ -1,28 +1,23 @@
-== README
+== HappyNel - About
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+See this [gist](https://gist.github.com/pedroaugusto/98fcc93cc3d80e089816) to get more info about this project.
 
-Things you may want to cover:
+* Ruby 2.2.1 e Rails 4.2.5
 
-* Ruby version
+== Database
 
-* System dependencies
+* Postgresql 9.3
 
-* Configuration
+Use the following environment variables for your database credentials:
 
-* Database creation
+	$ export DB_USRNAME='database-role-name'
+	$ export DB_PASSWD='database-role-password'
 
-* Database initialization
+== Mailing
 
-* How to run the test suite
+This app users [Mailcatcher](http://mailcatcher.me/) to send emails on development environment. So you must install it on your local machine:
 
-* Services (job queues, cache servers, search engines, etc.)
+	$ gem install mailcatcher
+	$ mailcatcher # Then access your localhost:1080 to see web interface and received emails
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+On production environment, unless you set your own configs, you will need (Sendgrid)[https://sendgrid.com/] credentials.
