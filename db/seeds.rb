@@ -12,4 +12,4 @@ User.create([
 	{name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: User.roles[:member]},
 	{name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: User.roles[:member]},
 	{name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: User.roles[:member]}
-]) User.members.any?
+]) User.members.any? and Rails.env.development?
