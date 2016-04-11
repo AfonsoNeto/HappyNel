@@ -33,4 +33,9 @@ class Poll < ActiveRecord::Base
 		self.save
 		return true
 	end
+
+	def self.schedule_weekly_poll(run_at = 7.days.from_now)
+		User.send_call_for_members(Poll.create(has_finished: false))
+		Poll.delay(run_at: run_at).schedule_weekly_poll
+	end
 end
