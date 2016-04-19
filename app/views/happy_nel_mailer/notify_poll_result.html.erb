@@ -98,6 +98,21 @@ A component of Napkinstudio Portal - http://portal.napkinstudio.nl
 				</div>
 				<!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>
 			</td></tr>
+
+			<% if @poll.opinions.any? %>
+				<tr><td align="center">
+					<div style="line-height: 24px; text-align: center;">
+						<font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 20px; text-align: left;">
+							<h3 style="text-align: center">Opiniões</h3>
+							<% @poll.opinions.each do |opinion| %>
+								<blockquote>- "<%= opinion %>"</blockquote>
+							<% end %>
+						</font>
+					</div>
+				</td></tr>
+			<% end %>
+
+
 		</table>		
 	</td></tr>
 	<!--content 1 END-->

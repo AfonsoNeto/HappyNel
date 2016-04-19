@@ -47,7 +47,9 @@ class PollsController < ApplicationController
         format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
 
       elsif !@voting_history.has_voted and @voting_history.poll.add_vote(params[:score])
-        @voting_history.update_attributes({has_voted: true})
+        @voting_history.has_voted = true
+        @voting_history.opinion   = params[:voting_opinion] unless params[:voting_opinion].blank?
+        @voting_history.save
         
         format.html { redirect_to :thanks_to_vote }
       else

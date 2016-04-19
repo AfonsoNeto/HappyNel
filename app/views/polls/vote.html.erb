@@ -4,10 +4,14 @@
 			<div class="row text-center">
 
 				<%= form_tag(set_score_polls_path, method: :patch, id: "voting-form") do %>
+					<div class="form-group">
+						<%= text_area_tag :voting_opinion, nil, class: "form-control", placeholder: "Alguma observação?" %>
+					</div>
+
 					<%= hidden_field_tag "token", @token %>
 					<input id="voting-star-rating" name="score" class="rating-loading">
+					
 				<% end %>
-
 			</div>
 		</div>
 	</div>

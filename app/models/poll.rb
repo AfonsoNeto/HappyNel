@@ -4,6 +4,10 @@ class Poll < ActiveRecord::Base
 	validates :acumulated_score, :final_result, presence: true
 	validates :has_finished, inclusion: [true, false]
 
+	def opinions
+		self.voting_histories.map(&:opinion).compact
+	end
+
 	def partial_result
 		return self.final_result if self.final_result > 0
 		return 0 if self.acumulated_score == 0
@@ -36,6 +40,6 @@ class Poll < ActiveRecord::Base
 
 	def self.schedule_weekly_poll(run_at = 7.days.from_now)
 		User.send_call_for_members(Poll.create(has_finished: false))
-		Poll.delay(run_at: run_at).schedule_weekly_poll
+		Poll.delay(run_at: run_at, queue: "weekly-poll").schedule_weekly_poll
 	end
 end
