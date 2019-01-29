@@ -18,7 +18,7 @@ Use the following environment variables for your database credentials:
 Mailing
 =======
 
-This app users [Mailcatcher](http://mailcatcher.me/) to send emails on development environment. So you must install it on your local machine:
+This app uses [Mailcatcher](http://mailcatcher.me/) to send emails on development environment. So you must install it on your local machine:
 
 	$ gem install mailcatcher
 	$ mailcatcher # Then access your localhost:1080 to see web interface with the received/sent emails
